@@ -1,0 +1,345 @@
+/* ===== GENEL DOKUNUŞLAR ===== */
+
+body {
+  transition: background-color .3s, color .3s;
+  min-height: 100vh;
+}
+
+/* ===== ADIM GÖSTERGESİ ===== */
+
+.wizard-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 .5rem;
+}
+
+.wizard-steps::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--bs-border-color);
+  z-index: 0;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.step-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bs-body-bg);
+  border: 2px solid var(--bs-border-color);
+  color: var(--bs-secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .9rem;
+  transition: all .3s;
+}
+
+.wizard-step.active .step-num {
+  background: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
+}
+
+.wizard-step.completed .step-num {
+  background: var(--bs-primary-bg-subtle);
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+}
+
+.step-label {
+  font-size: .72rem;
+  color: var(--bs-secondary-color);
+  font-weight: 600;
+}
+
+.wizard-step.active .step-label {
+  color: var(--bs-primary);
+}
+
+/* ===== MOD SEÇİM KARTLARI ===== */
+
+.mode-card {
+  background: var(--bs-body-bg);
+  border: 2px solid var(--bs-border-color);
+  border-radius: 16px;
+  padding: 1.25rem .75rem;
+  cursor: pointer;
+  transition: all .2s;
+  color: var(--bs-body-color);
+}
+
+.mode-card:hover {
+  border-color: var(--bs-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(13, 110, 253, .15);
+}
+
+.mode-card.selected {
+  border-color: var(--bs-primary);
+  background: var(--bs-primary-bg-subtle);
+}
+
+/* ===== MASKELEME MOD PİLLERİ ===== */
+
+.mode-pill {
+  padding: .4rem .9rem;
+  border: 1px solid var(--bs-border-color);
+  background: transparent;
+  color: var(--bs-body-color);
+  border-radius: 999px;
+  font-size: .78rem;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+
+.mode-pill:hover {
+  border-color: var(--bs-primary);
+}
+
+.mode-pill.active {
+  background: var(--bs-primary);
+  color: #fff;
+  border-color: var(--bs-primary);
+}
+
+/* ===== SONUÇ KARTLARI ===== */
+
+.result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .85rem 1rem;
+  background: var(--bs-tertiary-bg);
+  border-radius: 12px;
+  margin-bottom: .5rem;
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-size: .88rem;
+  word-break: break-all;
+  animation: fadeSlide .3s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.result-item .orig-email {
+  color: var(--bs-secondary-color);
+  font-size: .72rem;
+  display: block;
+  margin-bottom: .15rem;
+}
+
+.result-item .copy-btn {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--bs-primary);
+  font-size: 1.1rem;
+  padding: .3rem;
+  border-radius: 8px;
+  transition: background .2s;
+}
+
+.result-item .copy-btn:hover {
+  background: var(--bs-primary-bg-subtle);
+}
+
+/* ===== GEÇMİŞ ÖĞELERİ ===== */
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem .75rem;
+  background: var(--bs-tertiary-bg);
+  border-radius: 8px;
+  margin-bottom: .35rem;
+  font-family: ui-monospace, monospace;
+  font-size: .78rem;
+  animation: fadeSlide .3s ease;
+}
+
+/* ===== QR KUTUSU ===== */
+
+.qr-box {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: .75rem;
+  background: #fff;
+  border-radius: 12px;
+  min-width: 150px;
+  min-height: 150px;
+  border: 1px solid var(--bs-border-color);
+}
+
+.qr-box:empty::before {
+  content: "QR burada";
+  color: #999;
+  font-size: .8rem;
+}
+
+/* ===== QR KAYDIRICI ===== */
+
+.qr-switch-wrap {
+  background: var(--bs-tertiary-bg);
+  border-radius: 12px;
+  padding: .75rem;
+}
+
+.qr-switch:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.qr-switch-wrap #labelUnmasked,
+.qr-switch-wrap #labelMasked {
+  transition: color .25s, opacity .25s;
+}
+
+/* ===== ÇOKLU QR IZGARASI ===== */
+
+.qr-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: .75rem;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: .25rem;
+}
+
+.qr-item {
+  text-align: center;
+  padding: .5rem;
+  background: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 10px;
+  animation: fadeSlide .3s ease;
+}
+
+.qr-item .qr-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: .4rem;
+  min-width: 0;
+  min-height: 0;
+  display: inline-block;
+  border: none;
+}
+
+.qr-item .qr-label {
+  display: block;
+  font-size: .68rem;
+  color: var(--bs-secondary-color);
+  margin-top: .3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: ui-monospace, monospace;
+}
+
+.qr-item .qr-dl-btn {
+  margin-top: .3rem;
+  font-size: .7rem;
+  padding: .15rem .5rem;
+}
+
+/* ===== GELİŞTİRENLER MENÜSÜ ===== */
+
+.dev-card {
+  background: var(--bs-tertiary-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 14px;
+  padding: 1rem;
+  transition: border-color .2s;
+}
+
+.dev-card:hover {
+  border-color: var(--bs-primary);
+}
+
+.dev-role {
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--bs-primary);
+  background: var(--bs-primary-bg-subtle);
+  padding: .15rem .6rem;
+  border-radius: 999px;
+  margin-bottom: .5rem;
+}
+
+.dev-name {
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.dev-link {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem .75rem;
+  margin-top: .4rem;
+  border-radius: 10px;
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  text-decoration: none;
+  font-size: .82rem;
+  border: 1px solid transparent;
+  transition: all .2s;
+  word-break: break-all;
+}
+
+.dev-link:hover {
+  background: var(--bs-primary-bg-subtle);
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+  transform: translateX(3px);
+}
+
+.dev-link > i:first-child {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.dev-link > i:last-child {
+  font-size: .75rem;
+  opacity: .5;
+}
+
+/* ===== MOBİL İYİLEŞTİRMELER ===== */
+
+@media (max-width: 400px) {
+  .step-label { font-size: .65rem; }
+  .step-num { width: 34px; height: 34px; font-size: .8rem; }
+  .wizard-steps::before { top: 16px; }
+  .mode-card { padding: 1rem .5rem; }
+}
+
+@media (hover: none) {
+  .mode-pill, .mode-card, .btn { min-height: 44px; }
+}

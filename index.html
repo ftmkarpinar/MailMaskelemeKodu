@@ -1,12 +1,398 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" data-bs-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mail Maskeleme
-    </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Sayfa başlığım -->
+  <title>Mail Maskeleme Pro / E-posta Gizlilik Aracı</title>
+
+  <!-- Arama motorları için açıklama yazım -->
+  <meta name="description" content="E-posta adreslerinizi paylaşırken gizliliğinizi koruyun. Tek veya toplu maskeleme, QR kod ile paylaşım, geçmiş kaydı. Tamamen tarayıcıda çalışır, verileriniz sunucuya gitmez.">
+  <meta name="keywords" content="mail maskeleme, e-posta gizleme, email mask, gizlilik, qr kod">
+  <meta name="author" content="Mail Maskeleme Pro">
+
+  <!-- Sosyal medya paylaşım etiketlerim -->
+  <meta property="og:title" content="Mail Maskeleme Pro">
+  <meta property="og:description" content="E-posta adreslerinizi güvenle paylaşın. Tarayıcıda çalışır, veri sunucuya gitmez.">
+  <meta property="og:type" content="website">
+
+  <!-- Emoji favicon'u SVG data URI olarak buraya gömüyorum -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- QR kod kütüphanem -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <!-- Kendi özel stillerim -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script src="app.js"></script>
+
+  <!-- ============ ÜST BAR ============ -->
+  <nav class="navbar bg-body-tertiary border-bottom sticky-top">
+    <div class="container">
+      <span class="navbar-brand fw-bold mb-0">
+        🛡️ Mail Maskeleme <span class="text-primary">Pro</span>
+      </span>
+      <div class="d-flex gap-2">
+        <!-- Tema butonu -->
+        <button id="themeToggle" class="btn btn-outline-secondary btn-sm" title="Tema değiştir">
+          <i class="bi bi-moon-stars"></i>
+        </button>
+        <!-- Geliştirenler butonu -->
+        <button class="btn btn-outline-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#devMenu"
+                title="Geliştirenler">
+          <i class="bi bi-people-fill"></i>
+          <span class="d-none d-sm-inline ms-1">Geliştirenler</span>
+        </button>
+        <!-- Ana menü butonu -->
+        <button class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" data-bs-target="#sideMenu">
+          <i class="bi bi-list"></i>
+          <span class="d-none d-sm-inline ms-1">Menü</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ GELİŞTİRENLER MENÜSÜ (OFFCANVAS) ============ -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="devMenu">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title">👨‍💻 Geliştirenler</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <!-- --- PROJE SAHİBİ --- -->
+      <div class="dev-card mb-3">
+        <div class="dev-role">Proje Sahibi</div>
+        <h6 class="dev-name mb-3">
+          <i class="bi bi-person-badge-fill text-primary"></i> Fatma Karpınar
+        </h6>
+
+        <!-- GitHub bağlantım -->
+        <a href="https://github.com/ftmkarpinar" target="_blank" rel="noopener noreferrer"
+           class="dev-link">
+          <i class="bi bi-github"></i>
+          <span>github.com/ftmkarpinar</span>
+          <i class="bi bi-box-arrow-up-right ms-auto"></i>
+        </a>
+
+        <!-- Gmail bağlantım -->
+        <a href="mailto:ftmkarpinar46@gmail.com" target="_blank" rel="noopener noreferrer"
+           class="dev-link">
+          <i class="bi bi-envelope-fill text-danger"></i>
+          <span>ftmkarpinar46@gmail.com</span>
+          <i class="bi bi-box-arrow-up-right ms-auto"></i>
+        </a>
+      </div>
+
+      <!-- --- KATKIDA BULUNAN --- -->
+      <div class="dev-card mb-3">
+        <div class="dev-role">Katkıda Bulunan</div>
+        <h6 class="dev-name mb-3">
+          <i class="bi bi-person-heart text-success"></i> Engin Arslan
+        </h6>
+
+        <!-- GitHub bağlantısı -->
+        <a href="https://github.com/EnginArslan49" target="_blank" rel="noopener noreferrer"
+           class="dev-link">
+          <i class="bi bi-github"></i>
+          <span>github.com/EnginArslan49</span>
+          <i class="bi bi-box-arrow-up-right ms-auto"></i>
+        </a>
+
+        <!-- Gmail bağlantısı -->
+        <a href="mailto:arslanengin3175@gmail.com" target="_blank" rel="noopener noreferrer"
+           class="dev-link">
+          <i class="bi bi-envelope-fill text-danger"></i>
+          <span>arslanengin3175@gmail.com</span>
+          <i class="bi bi-box-arrow-up-right ms-auto"></i>
+        </a>
+
+        <!-- YouTube bağlantısı -->
+        <a href="https://youtube.com/@ramkafe" target="_blank" rel="noopener noreferrer"
+           class="dev-link">
+          <i class="bi bi-youtube text-danger"></i>
+          <span>youtube.com/@ramkafe</span>
+          <i class="bi bi-box-arrow-up-right ms-auto"></i>
+        </a>
+      </div>
+
+      <hr>
+
+      <!-- Küçük bir teşekkür notu -->
+      <p class="text-muted small text-center mb-0">
+        Bu proje açık kaynak ruhuyla geliştirilmiştir.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ SAĞ MENÜ (OFFCANVAS) ============ -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="sideMenu">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title">📂 Menü</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <!-- --- GEÇMİŞ BÖLÜMÜ --- -->
+      <h6 class="text-uppercase text-muted small fw-bold mb-2">
+        <i class="bi bi-clock-history"></i> Geçmiş
+        <span id="historyCount" class="badge bg-primary ms-1">0</span>
+      </h6>
+
+      <div id="historyList" class="mb-3">
+        <p class="text-muted small text-center py-3">Henüz kayıt yok.</p>
+      </div>
+
+      <div class="d-grid gap-2 mb-4">
+        <div class="btn-group btn-group-sm">
+          <button id="exportCsv" class="btn btn-outline-secondary">
+            <i class="bi bi-download"></i> CSV
+          </button>
+          <button id="exportJson" class="btn btn-outline-secondary">
+            <i class="bi bi-download"></i> JSON
+          </button>
+        </div>
+        <button id="clearHistory" class="btn btn-outline-danger btn-sm">
+          <i class="bi bi-trash"></i> Geçmişi Temizle
+        </button>
+      </div>
+
+      <hr>
+
+      <!-- --- DEPOLAMA BİLGİSİ --- -->
+      <div class="alert alert-info small mb-4" role="alert">
+        <h6 class="alert-heading fw-bold mb-2">
+          <i class="bi bi-info-circle"></i> Verileriniz nerede saklanıyor?
+        </h6>
+        <p class="mb-2">
+          Maskelediğiniz e-postalar <strong>yalnızca bu tarayıcıda</strong>,
+          <code>localStorage</code> adı verilen yerel depolama alanında tutulur.
+          <strong>Hiçbir veri sunucuya gönderilmez.</strong>
+        </p>
+        <p class="mb-0">
+          <strong>Nasıl silinir?</strong>
+          <br>1️⃣ Yukarıdaki <em>"Geçmişi Temizle"</em> butonuna basın
+          <br>2️⃣ Veya tarayıcı ayarlarından <em>"Site verilerini temizle"</em> deyin
+        </p>
+      </div>
+
+      <hr>
+
+      <!-- --- QR KOD BÖLÜMÜ (kaydırıcılı) --- -->
+      <h6 class="text-uppercase text-muted small fw-bold mb-2">
+        <i class="bi bi-qr-code"></i> QR Kod ile Paylaş
+      </h6>
+
+      <div class="qr-switch-wrap mb-3">
+        <div class="d-flex justify-content-between small fw-bold mb-1">
+          <span id="labelUnmasked">Maskesiz</span>
+          <span id="labelMasked" class="text-muted">Maskeli</span>
+        </div>
+        <div class="form-check form-switch d-flex justify-content-center m-0">
+          <input class="form-check-input qr-switch" type="checkbox" role="switch"
+                 id="qrModeSwitch" style="width: 3.2em; height: 1.6em; cursor: pointer;">
+        </div>
+        <p class="text-muted small text-center mt-1 mb-0" id="qrModeHint">
+          Şu an: <strong>maskelenmemiş</strong> adres
+        </p>
+      </div>
+
+      <div id="qrContainer" class="qr-container mb-3">
+        <div class="qr-box mx-auto" id="qrPlaceholder">
+          <span class="text-muted small">QR burada</span>
+        </div>
+      </div>
+
+      <button id="downloadQrBtn" class="btn btn-outline-primary btn-sm w-100" disabled>
+        <i class="bi bi-download"></i> QR'ı PNG Olarak İndir
+      </button>
+      <p class="text-muted small mt-2 mb-0 text-center">
+        Kaydırıcıyı sağa çek → maskelenmiş, sola çek → maskelenmemiş adres QR'ı.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ ANA İÇERİK ============ -->
+  <main class="container py-4" style="max-width: 640px;">
+
+    <!-- --- ADIM GÖSTERGESİ --- -->
+    <div class="wizard-steps mb-4" id="wizardSteps">
+      <div class="wizard-step active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">Mod</span>
+      </div>
+      <div class="wizard-step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">Giriş</span>
+      </div>
+      <div class="wizard-step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">Sonuç</span>
+      </div>
+    </div>
+
+    <!-- ============ ADIM 1: MOD SEÇİMİ ============ -->
+    <section id="step1" class="step-panel">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4 text-center">
+
+          <!-- Adım 1'e geri butonu: önceki işlemi tamamen sıfırlar -->
+          <div class="d-flex align-items-center mb-3">
+            <button class="btn btn-sm btn-outline-secondary" id="backFromStep1"
+                    title="Baştan başla / sıfırla">
+              <i class="bi bi-arrow-counterclockwise"></i>
+              <span class="d-none d-sm-inline ms-1">Sıfırla</span>
+            </button>
+          </div>
+
+          <h4 class="card-title fw-bold mb-1">Nasıl ilerlemek istersin?</h4>
+          <p class="text-muted small mb-4">Önce işlem modunu seç, sonra devam edelim.</p>
+
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
+              <button class="mode-card w-100" data-mode-choice="single">
+                <i class="bi bi-envelope-fill display-5 text-primary"></i>
+                <h6 class="fw-bold mt-2 mb-1">Tek E-posta</h6>
+                <small class="text-muted">Tek bir adresi maskele</small>
+              </button>
+            </div>
+            <div class="col-12 col-sm-6">
+              <button class="mode-card w-100" data-mode-choice="bulk">
+                <i class="bi bi-envelope-paper-fill display-5 text-success"></i>
+                <h6 class="fw-bold mt-2 mb-1">Toplu</h6>
+                <small class="text-muted">Birden çok adresi işle</small>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ADIM 2: GİRİŞ ============ -->
+    <section id="step2" class="step-panel d-none">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center mb-3">
+            <button class="btn btn-sm btn-outline-secondary me-2" id="backToStep1">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <h5 class="mb-0 fw-bold" id="step2Title">E-posta Gir</h5>
+          </div>
+
+          <!-- --- TEK MAIL GİRİŞİ --- -->
+          <div id="singleInputGroup">
+            <label for="emailInput" class="form-label small fw-bold">E-posta adresi</label>
+            <input id="emailInput" type="email" class="form-control form-control-lg"
+                   placeholder="ornek@mail.com" autocomplete="off" inputmode="email">
+
+            <label class="form-label small fw-bold mt-3">Maskeleme stili</label>
+            <div class="d-flex flex-wrap gap-2" id="modes">
+              <button class="mode-pill active" data-mode="first-last">İlk + Son</button>
+              <button class="mode-pill" data-mode="first2-last2">İlk 2 + Son 2</button>
+              <button class="mode-pill" data-mode="hide-local">Sadece Domain</button>
+              <button class="mode-pill" data-mode="hide-domain">Domain'i Gizle</button>
+              <button class="mode-pill" data-mode="full">Tamamen Gizle</button>
+            </div>
+
+            <button id="singleSubmit" class="btn btn-primary btn-lg w-100 mt-4">
+              Maskele <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- --- TOPLU MAIL GİRİŞİ --- -->
+          <div id="bulkInputGroup" class="d-none">
+            <label for="bulkInput" class="form-label small fw-bold">
+              E-posta adresleri (her satıra bir tane veya virgülle ayır)
+            </label>
+            <textarea id="bulkInput" class="form-control" rows="6"
+                      placeholder="ali@x.com&#10;veli@y.com&#10;ayse@z.com"></textarea>
+
+            <label class="form-label small fw-bold mt-3">Maskeleme stili</label>
+            <div class="d-flex flex-wrap gap-2" id="modesBulk">
+              <button class="mode-pill active" data-mode="first-last">İlk + Son</button>
+              <button class="mode-pill" data-mode="first2-last2">İlk 2 + Son 2</button>
+              <button class="mode-pill" data-mode="hide-local">Sadece Domain</button>
+              <button class="mode-pill" data-mode="hide-domain">Domain'i Gizle</button>
+              <button class="mode-pill" data-mode="full">Tamamen Gizle</button>
+            </div>
+
+            <button id="bulkSubmit" class="btn btn-success btn-lg w-100 mt-4">
+              Hepsini Maskele <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ADIM 3: SONUÇ ============ -->
+    <section id="step3" class="step-panel d-none">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+          <!-- Geri butonu + başlık -->
+          <div class="d-flex align-items-center mb-3">
+            <button class="btn btn-sm btn-outline-secondary me-2" id="backToStep2FromResult"
+                    title="Giriş ekranına dön">
+              <i class="bi bi-arrow-left"></i>
+            </button>
+            <h5 class="mb-0 fw-bold">Sonuçlar</h5>
+          </div>
+
+          <div id="resultsArea" class="mb-3"></div>
+
+          <!-- Kopyala + QR -->
+          <div class="d-grid gap-2 mb-3">
+            <button id="copyAllBtn" class="btn btn-outline-primary">
+              <i class="bi bi-clipboard"></i> Tümünü Kopyala
+            </button>
+            <button class="btn btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#sideMenu">
+              <i class="bi bi-qr-code"></i> QR Kod / Menü
+            </button>
+          </div>
+
+          <hr>
+
+          <!-- Sonda tekrar maskeleme butonları -->
+          <p class="text-muted small fw-bold text-center mb-2">Tekrar maskele</p>
+
+          <div class="d-grid gap-2">
+            <button id="repeatSingle" class="btn btn-primary">
+              <i class="bi bi-envelope-fill"></i> Tek E-posta Maskele
+            </button>
+
+            <button id="repeatBulk" class="btn btn-success">
+              <i class="bi bi-envelope-paper-fill"></i> Toplu Maskele
+            </button>
+
+            <button id="restart" class="btn btn-outline-secondary btn-sm mt-1">
+              <i class="bi bi-arrow-counterclockwise"></i> En Baştan Başla
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast bildirim kutum -->
+  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+    <div id="toast" class="toast align-items-center text-bg-primary border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMsg"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Kendi uygulama mantığım -->
+  <script src="app.js"></script>
 </body>
 </html>
